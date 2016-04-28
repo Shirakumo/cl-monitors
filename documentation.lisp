@@ -185,14 +185,22 @@ See MONITOR
 See MODE")
   
   (function width
-    "Returns the mode's width in pixels.
+    "Returns the width.
 
-See MODE")
+For a mode, this is in pixels.
+For a monitor, this is in physical millimetres.
+
+See MODE
+See MONITOR")
   
   (function height
-    "Returns the mode's height in pixels.
+    "Returns the height.
 
-See MODE")
+For a mode, this is in pixels.
+For a monitor, this is in physical millimetres.
+
+See MODE
+See MONITOR")
   
   (function refresh
     "Returns the mode's refresh rate in Herz.
@@ -238,16 +246,6 @@ See MONITOR")
   
   (function primary-p
     "Returns whether the monitor is the system's primary monitor.
-
-See MONITOR")
-  
-  (function width
-    "Returns the monitor's physical width in millimetres.
-
-See MONITOR")
-  
-  (function height
-    "Returns the monitor's physical height in millimetres.
 
 See MONITOR")
   
