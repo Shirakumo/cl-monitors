@@ -47,7 +47,7 @@
   ;; Create modes
   (setf (slot-value monitor 'modes)
         (loop for i from 0 below (monitor-mode-count pointer)
-              for mode-pointer = (cffi:mem-aptr (monitor-modes pointer) '(:struct mode) i)
+              for mode-pointer = (cffi:mem-aptr (monitor-modes pointer) '(:struct mode-struct) i)
               for mode = (make-instance 'mode :monitor monitor :pointer mode-pointer)
               collect mode
               do (when (cffi:pointer-eq mode-pointer (monitor-current-mode pointer))

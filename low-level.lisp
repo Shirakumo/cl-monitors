@@ -24,14 +24,14 @@
 
 (use-foreign-library libmonitors)
 
-(defcstruct (mode :conc-name mode-)
+(defcstruct (mode-struct :class mode-struct :conc-name mode-)
   (monitor :pointer)
   (width :int)
   (height :int)
   (refresh :int)
   (data :pointer))
 
-(defcstruct (monitor :conc-name monitor-)
+(defcstruct (monitor-struct :class mode-struct :conc-name monitor-)
   (name :string)
   (primary :bool)
   (width :int)

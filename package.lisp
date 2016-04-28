@@ -10,16 +10,17 @@
   (:use #:cl #:cffi)
   ;; low-level.lisp
   (:export
+   #:*static*
    #:libmonitors
    
-   #:mode
+   #:mode-struct
    #:mode-monitor
    #:mode-width
    #:mode-height
    #:mode-refresh
    #:mode-data
    
-   #:monitor
+   #:monitor-struct
    #:monitor-name
    #:monitor-primary
    #:monitor-width
