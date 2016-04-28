@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8"/>
+    <title>CL-MONITORS</title>
+    <style type="text/css">
+      html{font-family: serif;}
+      code a{text-decoration: none;}
+      h1{display: inline-block; margin-bottom: 0;}
+      code{font-family: monospace;}
+      h4{display: inline-block; margin: 0; padding: 0;}
+      #symbol-index ul{list-style: none;}
+      .package li{margin-bottom: 20px;}
+      .package pre{margin: 0 0 0 10px; white-space: pre-wrap;}
+      .package .nicknames{font-weight: normal;}
+      table{margin: 20px;}
+      td{padding-bottom: 10px;}
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>cl-monitors</h1>
+      <span class="version">1.0.0</span>
+      <p class="description">Bindings to libmonitors, allowing the handling of monitors querying and resolution changing.</p>
+    </header>
+    <div id="content">
+      <article>
+        
+          <span><h2>About cl-monitors</h2>
+
+<p>This is a small wrapper library around <a href="https://github.com/Shirakumo/libmonitors">libmonitors</a>, providing independent monitor resolution detection and change support.</p>
+
+<h2>How To</h2>
+
+<p>Precompiled versions of the underlying library are included in this. If you want to build it manually however, refer to the <a href="https://github.com/Shirakumo/libmonitors">libmonitors</a> README.</p>
+
+<p>Load the system through ASDF or Quicklisp and initialise it:</p>
+
+<pre><code>(ql:quickload :cl-monitors)
+(<a href="#CL-MONITORS:INIT">cl-monitors:init</a>)
+</code></pre>
+
+<p>Now you can retrieve a list of the monitors on your system:</p>
+
+<pre><code>(<a href="#CL-MONITORS:DETECT">cl-monitors:detect</a>)
+</code></pre>
+
+<p>You can inspect the available video modes for each of them too:</p>
+
+<pre><code>(<a href="http://l1sp.org/cl/mapcar">mapcar</a> #'cl-monitors:modes *)
+</code></pre>
+
+<p>And even switch the mode:</p>
+
+<pre><code>(<a href="#CL-MONITORS:MAKE-CURRENT">cl-monitors:make-current</a> (<a href="http://l1sp.org/cl/second">second</a> (<a href="http://l1sp.org/cl/first">first</a> *)))
+</code></pre>
+
+<p>Though you probably want to switch back again to your preferred resolution:</p>
+
+<pre><code>(<a href="#CL-MONITORS:MAKE-CURRENT">cl-monitors:make-current</a> (<a href="http://l1sp.org/cl/first">first</a> (<a href="http://l1sp.org/cl/first">first</a> **)))
+</code></pre>
+
+<p>Once you're all done, don't forget to clean up again after yourself:</p>
+
+<pre><code>(<a href="#CL-MONITORS:DEINIT">cl-monitors:deinit</a>)
+</code></pre>
+
+<p>And that's all there is to it. Well-- almost all. You can query information from the <code><a href="#CL-MONITORS:MONITOR">monitor</a></code> and <code><a href="#CL-MONITORS:MODE">mode</a></code> objects as well of course. For this, see <code><a href="#CL-MONITORS:WIDTH">width</a></code>, <code><a href="#CL-MONITORS:HEIGHT">height</a></code>, <code><a href="#CL-MONITORS:REFRESH">refresh</a></code>, <code><a href="#CL-MONITORS:CURRENT-P">current-p</a></code>, <code><a href="#CL-MONITORS:MODE">mode</a></code>, <code><a href="#CL-MONITORS:NAME">name</a></code>, and <code><a href="#CL-MONITORS:PRIMARY-P">primary-p</a></code>.</p>
+</span>
+        
+      </article>
+      <article>
+        
+          <h2>Copyright</h2>
+          <span>cl-monitors</span> is licensed under the <span><a href="https://tldrlegal.com/search?q=Artistic">Artistic</a></span> license.
+          
+            © <span>Nicolas Hafner &lt;shinmera@tymoon.eu&gt;</span>
+            .
+          
+          This library can be obtained on <a href="https://github.com/Shirakumo/cl-monitors">https://github.com/Shirakumo/cl-monitors</a>.
+        
+      </article>
+      
+        <article id="symbol-index">
+          <h2>Package Index</h2>
+          <ul><li class="package">
+              <h3>
+                <a name="CL-MONITORS-CFFI" href="#CL-MONITORS-CFFI">CL-MONITORS-CFFI</a>
+                <span class="nicknames">(ORG.SHIRAKUMO.FRAF.MONITORS.CFFI)</span>
+              </h3>
+              <ul><li>
+                  <a name="CL-MONITORS-CFFI:*STATIC*"/>
+                  <article>
+                    <header class="special">
+                      <span class="type">special</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:*STATIC*" class="name">*STATIC*</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">()</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Variable containing a pathname to the static directory.</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MODE-STRUCT"/>
+                  <article>
+                    <header class="class">
+                      <span class="type">class</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MODE-STRUCT" class="name">MODE-STRUCT</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">()</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">CL type for the C mode struct.
+
+See MODE-MONITOR
+See MODE-WIDTH
+See MODE-HEIGHT
+See MODE-REFRESH
+See MODE-DATA</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MODE-DATA"/>
+                  <article>
+                    <header class="accessor">
+                      <span class="type">accessor</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MODE-DATA" class="name">MODE-DATA</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(POINTER-TO-MODE-STRUCT)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Reads the pointer to the system-dependant data struct of the mode.
+
+You should not need this for anything.
+
+See MODE-STRUCT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MODE-HEIGHT"/>
+                  <article>
+                    <header class="accessor">
+                      <span class="type">accessor</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MODE-HEIGHT" class="name">MODE-HEIGHT</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(POINTER-TO-MODE-STRUCT)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Reads the mode's height in pixels.
+
+See MODE-STRUCT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MODE-MONITOR"/>
+                  <article>
+                    <header class="accessor">
+                      <span class="type">accessor</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MODE-MONITOR" class="name">MODE-MONITOR</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(POINTER-TO-MODE-STRUCT)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Reads the pointer to the monitor struct this mode originated from.
+
+See MODE-STRUCT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MODE-REFRESH"/>
+                  <article>
+                    <header class="accessor">
+                      <span class="type">accessor</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MODE-REFRESH" class="name">MODE-REFRESH</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(POINTER-TO-MODE-STRUCT)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Reads the mode's refresh rate in Herz.
+
+See MODE-STRUCT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MODE-WIDTH"/>
+                  <article>
+                    <header class="accessor">
+                      <span class="type">accessor</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MODE-WIDTH" class="name">MODE-WIDTH</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(POINTER-TO-MODE-STRUCT)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Reads the mode's width in pixels.
+
+See MODE-STRUCT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MONITOR-CURRENT-MODE"/>
+                  <article>
+                    <header class="accessor">
+                      <span class="type">accessor</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MONITOR-CURRENT-MODE" class="name">MONITOR-CURRENT-MODE</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(POINTER-TO-MONITOR-STRUCT)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Reads the pointer to the current mode of the monitor.
+
+See MONITOR-STRUCT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MONITOR-DATA"/>
+                  <article>
+                    <header class="accessor">
+                      <span class="type">accessor</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MONITOR-DATA" class="name">MONITOR-DATA</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(POINTER-TO-MONITOR-STRUCT)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Reads the pointer to the system-dependant data struct of the monitor.
+
+You should not need this for anything.
+
+See MONITOR-STRUCT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MONITOR-HEIGHT"/>
+                  <article>
+                    <header class="accessor">
+                      <span class="type">accessor</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MONITOR-HEIGHT" class="name">MONITOR-HEIGHT</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(POINTER-TO-MONITOR-STRUCT)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Reads the monitor's physical height in millimetres.
+
+See MONITOR-STRUCT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MONITOR-MODE-COUNT"/>
+                  <article>
+                    <header class="accessor">
+                      <span class="type">accessor</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MONITOR-MODE-COUNT" class="name">MONITOR-MODE-COUNT</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(POINTER-TO-MONITOR-STRUCT)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Reads the count for how many mode structs there are in the mode field of the monitor.
+
+See MONITOR-MODES
+See MONITOR-STRUCT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MONITOR-MODES"/>
+                  <article>
+                    <header class="accessor">
+                      <span class="type">accessor</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MONITOR-MODES" class="name">MONITOR-MODES</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(POINTER-TO-MONITOR-STRUCT)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Reads the pointer to the packed mode struct array of the monitor.
+
+See MONITOR-MODE-COUNT
+See MONITOR-STRUCT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MONITOR-NAME"/>
+                  <article>
+                    <header class="accessor">
+                      <span class="type">accessor</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MONITOR-NAME" class="name">MONITOR-NAME</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(POINTER-TO-MONITOR-STRUCT)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Reads the monitor's name string.
+
+See MONITOR-STRUCT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MONITOR-PRIMARY"/>
+                  <article>
+                    <header class="accessor">
+                      <span class="type">accessor</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MONITOR-PRIMARY" class="name">MONITOR-PRIMARY</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(POINTER-TO-MONITOR-STRUCT)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Reads whether the monitor is the primary monitor of the system.
+
+See MONITOR-STRUCT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MONITOR-WIDTH"/>
+                  <article>
+                    <header class="accessor">
+                      <span class="type">accessor</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MONITOR-WIDTH" class="name">MONITOR-WIDTH</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(POINTER-TO-MONITOR-STRUCT)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Reads the monitor's physical width in millimetres.
+
+See MONITOR-STRUCT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MONITORS-DEINIT"/>
+                  <article>
+                    <header class="function">
+                      <span class="type">function</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MONITORS-DEINIT" class="name">MONITORS-DEINIT</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">()</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Cleans up the monitors library. You should call this once you are done with everything.</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MONITORS-DETECT"/>
+                  <article>
+                    <header class="function">
+                      <span class="type">function</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MONITORS-DETECT" class="name">MONITORS-DETECT</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(COUNT MONITORS)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Detects the monitors and their modes on the system.
+
+You need to pass this two &quot;empty&quot; pointers. The first will be set to
+reference an int for the number of monitors that were detected, and the
+second to an array of pointers to monitor structs.
+
+If NIL is returned, the detection failed and the two pointers you passed will not have changed.
+
+See MONITOR-STRUCT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MONITORS-FREE-MONITOR"/>
+                  <article>
+                    <header class="function">
+                      <span class="type">function</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MONITORS-FREE-MONITOR" class="name">MONITORS-FREE-MONITOR</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(MONITOR)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Frees a monitor struct.
+
+See MONITOR-STRUCT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MONITORS-FREE-MONITORS"/>
+                  <article>
+                    <header class="function">
+                      <span class="type">function</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MONITORS-FREE-MONITORS" class="name">MONITORS-FREE-MONITORS</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(COUNT MONITORS)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Frees an array of pointers to monitor objects, including the monitors referenced by it.
+
+See MONITORS-FREE-MONITOR</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MONITORS-INIT"/>
+                  <article>
+                    <header class="function">
+                      <span class="type">function</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MONITORS-INIT" class="name">MONITORS-INIT</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">()</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Initializes the monitors library. You should call this before anything.
+
+If NIL is returned, the initialisation failed and other library calls
+will most likely too.</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS-CFFI:MONITORS-MAKE-MODE-CURRENT"/>
+                  <article>
+                    <header class="function">
+                      <span class="type">function</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS-CFFI:MONITORS-MAKE-MODE-CURRENT" class="name">MONITORS-MAKE-MODE-CURRENT</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(MODE)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Attempts to make the given mode the current mode on its monitor.
+
+If NIL is returned, the mode change failed. Otherwise the monitor's
+current mode is updated to reflect the newly chose none.
+
+See MODE-STRUCT
+See MONITOR-CURRENT-MODE</pre>
+                  </article>
+                </li></ul>
+            </li><li class="package">
+              <h3>
+                <a name="CL-MONITORS" href="#CL-MONITORS">CL-MONITORS</a>
+                <span class="nicknames">(ORG.SHIRAKUMO.FRAF.MONITORS)</span>
+              </h3>
+              <ul><li>
+                  <a name="CL-MONITORS:MODE"/>
+                  <article>
+                    <header class="class">
+                      <span class="type">class</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:MODE" class="name">MODE</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">()</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Class representing a possible display mode of a monitor.
+
+See MONITOR
+See WIDTH
+See HEIGHT
+See REFRESH
+See CURRENT-P</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:MONITOR"/>
+                  <article>
+                    <header class="class">
+                      <span class="type">class</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:MONITOR" class="name">MONITOR</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">()</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Class representing a physical monitor on the system.
+
+See MODES
+See MODE
+See NAME
+See PRIMARY-P
+See WIDTH
+See HEIGHT</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:DETECTION-FAILED-ERROR"/>
+                  <article>
+                    <header class="condition">
+                      <span class="type">condition</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:DETECTION-FAILED-ERROR" class="name">DETECTION-FAILED-ERROR</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">()</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Condition for when the monitor detection fails.
+
+See DETECT
+See MONITOR-CONDITION</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:INITIALIZATION-FAILED-ERROR"/>
+                  <article>
+                    <header class="condition">
+                      <span class="type">condition</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:INITIALIZATION-FAILED-ERROR" class="name">INITIALIZATION-FAILED-ERROR</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">()</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Condition for when the monitor initialization fails.
+
+See INIT
+See MONITOR-CONDITION</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:MODE-SWITCH-FAILED-ERROR"/>
+                  <article>
+                    <header class="condition">
+                      <span class="type">condition</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:MODE-SWITCH-FAILED-ERROR" class="name">MODE-SWITCH-FAILED-ERROR</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">()</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Condition for when the mode switch call fails.
+
+See MODE
+See MONITOR-CONDITION</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:MONITOR-CONDITION"/>
+                  <article>
+                    <header class="condition">
+                      <span class="type">condition</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:MONITOR-CONDITION" class="name">MONITOR-CONDITION</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">()</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Base condition class for conditions relating to this library.</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:MODE"/>
+                  <article>
+                    <header class="accessor">
+                      <span class="type">accessor</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:MODE" class="name">MODE</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(CONDITION)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Returns the current mode of the monitor.
+
+SETFable. When set with a suitable mode, it will attempt to switch
+the current mode of the monitor to the new one. 
+Signals a MODE-SWITCH-FAILED-ERROR on failure.
+
+See MODE
+See MONITOR</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:DETECT"/>
+                  <article>
+                    <header class="function">
+                      <span class="type">function</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:DETECT" class="name">DETECT</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">()</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Detects the monitors and modes on the system.
+
+Returns a list of monitors on the system.
+Signals a DETECTION-FAILED-ERROR on failured.
+
+See MONITOR</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:INIT"/>
+                  <article>
+                    <header class="function">
+                      <span class="type">function</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:INIT" class="name">INIT</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">()</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Initializes the library.
+
+You should call this before any other function to the library is called.
+Signals an INITIALIZATION-FAILED-ERROR on failure.</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:MAKE-CURRENT"/>
+                  <article>
+                    <header class="function">
+                      <span class="type">function</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:MAKE-CURRENT" class="name">MAKE-CURRENT</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(MODE)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Attempts to make the passed mode the current one.
+
+This is equivalent to doing (SETF (MODE (MONITOR mode)) mode).
+
+See MODE</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:CURRENT-P"/>
+                  <article>
+                    <header class="generic">
+                      <span class="type">generic</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:CURRENT-P" class="name">CURRENT-P</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(MODE)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Returns whether the mode is the current mode of the monitor.
+
+See MODE</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:HEIGHT"/>
+                  <article>
+                    <header class="generic">
+                      <span class="type">generic</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:HEIGHT" class="name">HEIGHT</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(MODE)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Returns the height.
+
+For a mode, this is in pixels.
+For a monitor, this is in physical millimetres.
+
+See MODE
+See MONITOR</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:MODES"/>
+                  <article>
+                    <header class="generic">
+                      <span class="type">generic</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:MODES" class="name">MODES</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(OBJECT)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Returns the list of possible modes the monitor can assume.
+
+A pox upon those that modify this list.
+
+See MONITOR</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:MONITOR"/>
+                  <article>
+                    <header class="generic">
+                      <span class="type">generic</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:MONITOR" class="name">MONITOR</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(OBJECT)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Returns the monitor the mode belongs to.
+
+See MONITOR
+See MODE</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:NAME"/>
+                  <article>
+                    <header class="generic">
+                      <span class="type">generic</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:NAME" class="name">NAME</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(MONITOR)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Returns the monitor's name on the system.
+
+See MONITOR</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:PRIMARY-P"/>
+                  <article>
+                    <header class="generic">
+                      <span class="type">generic</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:PRIMARY-P" class="name">PRIMARY-P</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(MONITOR)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Returns whether the monitor is the system's primary monitor.
+
+See MONITOR</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:REFRESH"/>
+                  <article>
+                    <header class="generic">
+                      <span class="type">generic</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:REFRESH" class="name">REFRESH</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(MODE)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Returns the mode's refresh rate in Herz.
+
+See MODE</pre>
+                  </article>
+                </li><li>
+                  <a name="CL-MONITORS:WIDTH"/>
+                  <article>
+                    <header class="generic">
+                      <span class="type">generic</span>
+                      <code>
+                        <h4><a href="#CL-MONITORS:WIDTH" class="name">WIDTH</a></h4>
+                        <span class="qualifiers"></span>
+                        <span class="arguments">(MODE)</span>
+                      </code>
+                    </header>
+                    <pre class="docstring">Returns the width.
+
+For a mode, this is in pixels.
+For a monitor, this is in physical millimetres.
+
+See MODE
+See MONITOR</pre>
+                  </article>
+                </li></ul>
+            </li></ul>
+        </article>
+      
+    </div>
+  </body>
+</html>
