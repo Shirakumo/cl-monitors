@@ -148,4 +148,131 @@ See MONITOR-STRUCT"))
 
 ;; wrapper.lisp
 (docs:define-docs
-  )
+  (type monitor-condition
+    "Base condition class for conditions relating to this library.")
+  
+  (type initialization-failed-error
+    "Condition for when the monitor initialization fails.
+
+See INIT
+See MONITOR-CONDITION")
+  
+  (type detection-failed-error
+    "Condition for when the monitor detection fails.
+
+See DETECT
+See MONITOR-CONDITION")
+  
+  (type mode-switch-failed-error
+    "Condition for when the mode switch call fails.
+
+See MODE
+See MONITOR-CONDITION")
+  
+  (type mode
+    "Class representing a possible display mode of a monitor.
+
+See MONITOR
+See WIDTH
+See HEIGHT
+See REFRESH
+See CURRENT-P")
+  
+  (function monitor
+    "Returns the monitor the mode belongs to.
+
+See MONITOR
+See MODE")
+  
+  (function width
+    "Returns the mode's width in pixels.
+
+See MODE")
+  
+  (function height
+    "Returns the mode's height in pixels.
+
+See MODE")
+  
+  (function refresh
+    "Returns the mode's refresh rate in Herz.
+
+See MODE")
+  
+  (function current-p
+    "Returns whether the mode is the current mode of the monitor.
+
+See MODE")
+  
+  (type monitor
+    "Class representing a physical monitor on the system.
+
+See MODES
+See MODE
+See NAME
+See PRIMARY-P
+See WIDTH
+See HEIGHT")
+  
+  (function modes
+    "Returns the list of possible modes the monitor can assume.
+
+A pox upon those that modify this list.
+
+See MONITOR")
+  
+  (function mode
+    "Returns the current mode of the monitor.
+
+SETFable. When set with a suitable mode, it will attempt to switch
+the current mode of the monitor to the new one. 
+Signals a MODE-SWITCH-FAILED-ERROR on failure.
+
+See MODE
+See MONITOR")
+  
+  (function name
+    "Returns the monitor's name on the system.
+
+See MONITOR")
+  
+  (function primary-p
+    "Returns whether the monitor is the system's primary monitor.
+
+See MONITOR")
+  
+  (function width
+    "Returns the monitor's physical width in millimetres.
+
+See MONITOR")
+  
+  (function height
+    "Returns the monitor's physical height in millimetres.
+
+See MONITOR")
+  
+  (function init
+    "Initializes the library.
+
+You should call this before any other function to the library is called.
+Signals an INITIALIZATION-FAILED-ERROR on failure.")
+  
+  (function deinit
+    "Cleans up the library.
+
+You should call this once you are done with everything.")
+  
+  (function detect
+    "Detects the monitors and modes on the system.
+
+Returns a list of monitors on the system.
+Signals a DETECTION-FAILED-ERROR on failured.
+
+See MONITOR")
+  
+  (function make-current
+    "Attempts to make the passed mode the current one.
+
+This is equivalent to doing (SETF (MODE (MONITOR mode)) mode).
+
+See MODE"))
