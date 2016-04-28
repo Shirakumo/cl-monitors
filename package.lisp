@@ -41,4 +41,21 @@
   (:use #:cl #:org.shirakumo.fraf.monitors.cffi)
   ;; wrapper.lisp
   (:export
-   ))
+   #:mode
+   #:monitor
+   #:width
+   #:height
+   #:refresh
+   
+   #:monitor
+   #:modes
+   #:mode
+   #:name
+   #:primary-p
+   #:width
+   #:height
+   
+   #:init
+   #:definit
+   #:detect
+   #:make-current))
