@@ -46,6 +46,7 @@
    #:width
    #:height
    #:refresh
+   #:current-p
    
    #:monitor
    #:modes

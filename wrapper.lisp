@@ -20,9 +20,13 @@
 
 (defmethod print-object ((mode mode) stream)
   (print-unreadable-object (mode stream :type T)
-    (format stream "~a ~ax~a@~aHz"
+    (format stream "~a ~ax~a@~aHz~@[ CURRENT~]"
             (name (monitor mode))
-            (width mode) (height mode) (refresh mode))))
+            (width mode) (height mode) (refresh mode)
+            (current-p mode))))
+
+(defmethod current-p ((mode mode))
+  (eql mode (mode (monitor mode))))
 
 (define-foreign-reader (width mode-width) (mode))
 (define-foreign-reader (height mode-height) (mode))
@@ -35,7 +39,7 @@
 (defmethod print-object ((monitor monitor) stream)
   (print-unreadable-object (monitor stream :type T)
     (let ((mode (mode monitor)))
-      (format stream "~a ~ax~a@~aHz ~@[PRIMARY~]"
+      (format stream "~a ~ax~a@~aHz~@[ PRIMARY~]"
               (name monitor) (width mode) (height mode) (refresh mode)
               (primary-p monitor)))))
 
