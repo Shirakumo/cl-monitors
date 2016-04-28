@@ -42,6 +42,12 @@
   (:use #:cl #:org.shirakumo.fraf.monitors.cffi)
   ;; wrapper.lisp
   (:export
+   #:monitor-condition
+   #:initialization-failed-error
+   #:detection-failed-error
+   #:mode-switch-failed-error
+   #:mode
+   
    #:mode
    #:monitor
    #:width

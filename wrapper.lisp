@@ -6,6 +6,21 @@
 
 (in-package #:org.shirakumo.fraf.monitors)
 
+(define-condition monitor-condition (condition)
+  ())
+
+(define-condition initialization-failed-error (monitor-condition error)
+  ()
+  (:report (lambda (c s) (format s "Failed to initialize the monitors library."))))
+
+(define-condition detection-failed-error (monitor-condition error)
+  ()
+  (:report (lambda (c s) (format s "Failed to detect monitors."))))
+
+(define-condition mode-switch-failed-error (monitor-condition error)
+  ((mode :initarg :mode :reader mode))
+  (:report (lambda (c s) (format s "Failed to switch mode to ~a." (mode c)))))
+
 (defmacro define-foreign-reader ((name internal-name) (class))
   `(defmethod ,name ((,class ,class))
      (,internal-name (pointer ,class))))
@@ -60,7 +75,7 @@
         ((mode monitor)
          (if (monitors-make-mode-current (pointer mode))
              (setf (slot-value monitor 'mode) mode)
-             (error "Failed to switch mode.")))
+             (error 'mode-switch-failed-error :mode mode)))
         (T
          (setf (slot-value monitor 'mode) mode)))
   mode)
@@ -72,7 +87,7 @@
 
 (defun init ()
   (unless (monitors-init)
-    (error "Failed to initialize.")))
+    (error 'initialization-failed-error)))
 
 (defun deinit ()
   (monitors-deinit))
@@ -81,7 +96,7 @@
   (cffi:with-foreign-objects ((count :pointer)
                               (monitors '(:pointer :pointer)))
     (unless (monitors-detect count monitors)
-      (error "Failed to detect monitors."))
+      (error 'detection-failed-error))
     (let ((monitors (cffi:mem-ref monitors :pointer)))
       (unwind-protect
            (loop for i from 0 below (cffi:mem-ref count :int)
