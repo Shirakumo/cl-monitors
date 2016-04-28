@@ -71,6 +71,8 @@
   (tg:finalize monitor (lambda () (monitors-free-monitor pointer))))
 
 (defmethod (setf mode) ((mode mode) (monitor monitor))
+  (unless (eql (monitor mode) monitor)
+    (error 'mode-switch-failed-error :mode mode))
   (cond ((eql mode (mode monitor)))
         ((mode monitor)
          (if (monitors-make-mode-current (pointer mode))
