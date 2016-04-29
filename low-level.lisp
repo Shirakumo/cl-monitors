@@ -12,8 +12,8 @@
 
 (define-foreign-library libmonitors
   (:darwin (:or "libmonitors.dylib" "libmonitors.so"
-                #+X86 "mac32-libmonitors.so"
-                #+X86-64 "mac64-libmonitors.so"))
+                #+X86 "mac32-libmonitors.dylib"
+                #+X86-64 "mac64-libmonitors.dylib"))
   (:unix (:or "libmonitors.so"
               #+X86 "lin32-libmonitors.so"
               #+X86-64 "lin64-libmonitors.so"))
