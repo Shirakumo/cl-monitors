@@ -104,7 +104,7 @@
            (loop for i from 0 below (cffi:mem-ref count :int)
                  for monitor-pointer = (cffi:mem-aref monitors :pointer i)
                  collect (make-instance 'monitor :pointer monitor-pointer))
-        (cffi:foreign-funcall "free" :pointer monitors)))))
+        (monitors-free-monitors 0 monitors)))))
 
 (defun make-current (mode)
   (setf (mode (monitor mode)) mode))
