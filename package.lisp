@@ -64,6 +64,6 @@
    #:height
    
    #:init
-   #:definit
+   #:deinit
    #:detect
    #:make-current))
