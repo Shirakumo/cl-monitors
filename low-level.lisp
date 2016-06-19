@@ -31,7 +31,7 @@
   (refresh :int)
   (data :pointer))
 
-(defcstruct (monitor-struct :class mode-struct :conc-name monitor-)
+(defcstruct (monitor-struct :class monitor-struct :conc-name monitor-)
   (name :string)
   (primary :bool)
   (width :int)
