@@ -28,7 +28,7 @@
   (monitor :pointer)
   (width :int)
   (height :int)
-  (refresh :int)
+  (refresh :double)
   (data :pointer))
 
 (defcstruct (monitor-struct :class monitor-struct :conc-name monitor-)
