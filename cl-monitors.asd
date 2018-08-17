@@ -10,7 +10,9 @@
   :author "Nicolas Hafner <shinmera@tymoon.eu>"
   :maintainer "Nicolas Hafner <shinmera@tymoon.eu>"
   :description "Bindings to libmonitors, allowing the handling of monitors querying and resolution changing."
-  :homepage "https://github.com/Shirakumo/cl-monitors"
+  :homepage "https://Shirakumo.github.io/cl-monitors/"
+  :bug-tracker "https://github.com/Shirakumo/cl-monitors/issues"
+  :source-control (:git "https://github.com/Shirakumo/cl-monitors.git")
   :serial T
   :components ((:file "package")
                (:file "low-level")
